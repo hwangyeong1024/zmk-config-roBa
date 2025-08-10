@@ -11,7 +11,10 @@
 &trackball {
     automouse-layer = <4>;
     scroll-layers = <5>;
-　　cpi = <800>;
+
+    　　
+
+    cpi = <800>;
 
     // arrows {
     //     layers = <3>;
@@ -79,33 +82,25 @@
             #binding-cells = <2>;
             tapping-term-ms = <200>;
 
-        encoder_binding_d: encoder_binding_d {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_D";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp PAGE_UP &kp PAGE_DOWN>; // ← ここで動作を定義
-        };
 
-        encoder_binding_a: encoder_binding_a {
-            compatible = "zmk,behavior-sensor-rotate";
-            label = "ENCODER_A";
-            #sensor-binding-cells = <0>;
-            bindings = <&kp LC(PAGE_UP) &kp LC(PAGE_DOWN)>; // ← ARROWレイヤー用の動作
-        };
     };
 
-    keymap {
+    
+macros {};
+
+behaviors {};
+keymap {
         compatible = "zmk,keymap";
 
         default_layer {
             bindings = <
-&kp Q             &kp W         &kp E         &kp R                        &kp T                                                      &kp Y        &kp U  &lt 5 I    &kp O    &kp P
-&kp A             &kp S         &kp D         &kp F                        &kp G        &kp ESC                        &kp QMARK      &kp H        &kp J  &kp K      &kp L    &kp MINUS
-&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V                        &kp B        &kp TAB                        &kp SEMICOLON  &kp N        &kp M  &kp COMMA  &kp DOT  &mt RSHFT SLASH
-&kp LCTRL         &kp LEFT_WIN  &kp LEFT_ALT  &lt_to_layer_0 6 INT_HENKAN  &lt 2 SPACE  &lt_to_layer_0 3 INT_KANA      &kp BACKSPACE  &lt 1 ENTER                             &kp DEL
-            >;
+&kp Q             &kp W         &kp E         &kp R                        &kp T                                                                 &kp Y        &kp U  &lt 5 I    &kp O    &kp P
+&kp A             &kp S         &kp D         &kp F                        &kp G        &kp ESC                                   &kp QMARK      &kp H        &kp J  &kp K      &kp L    &kp MINUS
+&mt LEFT_SHIFT Z  &kp X         &kp C         &kp V                        &kp B        &kp TAB                                   &kp SEMICOLON  &kp N        &kp M  &kp COMMA  &kp DOT  &mt RSHFT SLASH
+&kp LCTRL         &kp LEFT_WIN  &kp LEFT_ALT  &lt_to_layer_0 6 INT_HENKAN  &lt 2 SPACE  &lt_to_layer_0 3 LANG_ZENKAKUHANKAKU      &kp BACKSPACE  &lt 1 ENTER                             &kp DEL
+>;
 
-            sensor-bindings = <&encoder_binding_d>;
+            sensor-bindings = <&inc_dec_kp PAGE_DOWN PAGE_UP>;
         };
 
         FUNCTION {
@@ -114,7 +109,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp F6   &kp F7   &kp F8   &kp F9  &kp F10
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &kp F11  &kp F12  &kp F13  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                             &trans
-            >;
+>;
         };
 
         NUM {
@@ -123,7 +118,7 @@
 &kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5   &kp KP_NUMBER_6  &kp PLUS    &kp LC(LA(KP_NUMBER_0))      &kp UNDERSCORE  &kp LEFT_BRACE        &kp RIGHT_BRACE        &kp HASH          &kp DOLLAR  &kp PERCENT
 &mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2   &kp KP_NUMBER_3  &kp PERIOD  &kp EQUAL                    &kp EXCL        &kp LEFT_BRACKET      &kp RIGHT_BRACKET      &kp SINGLE_QUOTE  &kp SEMI    &kp BACKSLASH
 &trans                      &kp LESS_THAN    &kp GREATER_THAN  &trans           &trans      &trans                       &trans          &trans                                                                     &kp PIPE
-            >;
+>;
         };
 
         ARROW {
@@ -132,9 +127,9 @@
 &kp HOME        &kp LEFT_ARROW          &kp DOWN_ARROW    &kp RIGHT_ARROW          &kp END  &trans      &trans  &kp F6   &kp F7   &kp F8   &kp F9  &kp F10
 &kp LEFT_SHIFT  &kp LG(LS(LEFT_ARROW))  &kp LANG_HANGEUL  &kp LG(LS(RIGHT_ARROW))  &trans   &trans      &trans  &kp F11  &kp F13  &kp F13  &trans  &kp C_SLEEP
 &kp K_MUTE      &kp C_VOLUME_DOWN       &kp C_VOLUME_UP   &trans                   &trans   &trans      &trans  &trans                             &kt K_POWER
-            >;
+>;
 
-            sensor-bindings = <&encoder_binding_a>;
+            sensor-bindings = <&inc_dec_kp LC(PAGE_DOWN) LC(PAGE_UP)>;
         };
 
         MOUSE {
@@ -143,7 +138,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans    &trans    &trans    &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                                &trans
-            >;
+>;
         };
 
         SCROLL {
@@ -152,7 +147,7 @@
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans  &trans  &trans  &trans  &trans
 &trans  &trans  &trans  &trans  &trans  &trans      &trans  &trans                          &trans
-            >;
+>;
         };
 
         layer_6 {
@@ -161,7 +156,7 @@
 &trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans        &trans        &trans        &trans        &trans
 &trans  &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &trans  &trans      &bootloader  &trans        &trans        &trans        &trans        &bt BT_CLR
 &trans  &trans        &trans        &trans        &trans  &trans      &trans       &trans                                                  &bt BT_CLR_ALL
-            >;
+>;
         };
 
         layer_7 {
@@ -170,7 +165,7 @@
 &kp E             &kp I         &kp A     &kp O      &kp MINUS  &trans      &trans    &kp K      &kp T  &kp N  &kp S  &kp H
 &mt LEFT_SHIFT Z  &kp X         &kp C     &kp V      &trans     &trans      &trans    &kp G      &kp D  &kp M  &kp J  &kp B
 &kp LEFT_CONTROL  &kp LEFT_WIN  &kp LALT  &trans     &kp SPACE  &trans      &kp BSPC  &kp ENTER                       &kp DEL
-            >;
+>;
         };
     };
 };
