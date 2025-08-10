@@ -11,6 +11,7 @@
 &trackball {
     automouse-layer = <4>;
     scroll-layers = <5>;
+　　cpi = <800>;
 
     // arrows {
     //     layers = <3>;
@@ -26,6 +27,11 @@
 };
 
 / {
+    sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&encoder>;
+        triggers-per-rotation = <20>;
+
     combos {
         compatible = "zmk,combos";
 
@@ -72,6 +78,19 @@
 
             #binding-cells = <2>;
             tapping-term-ms = <200>;
+
+        encoder_binding_d: encoder_binding_d {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_D";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp PAGE_UP &kp PAGE_DOWN>; // ← ここで動作を定義
+        };
+
+        encoder_binding_a: encoder_binding_a {
+            compatible = "zmk,behavior-sensor-rotate";
+            label = "ENCODER_A";
+            #sensor-binding-cells = <0>;
+            bindings = <&kp LC(PAGE_UP) &kp LC(PAGE_DOWN)>; // ← ARROWレイヤー用の動作
         };
     };
 
@@ -86,7 +105,7 @@
 &kp LCTRL         &kp LEFT_WIN  &kp LEFT_ALT  &lt_to_layer_0 6 INT_HENKAN  &lt 2 SPACE  &lt_to_layer_0 3 INT_KANA      &kp BACKSPACE  &lt 1 ENTER                             &kp DEL
             >;
 
-            sensor-bindings = <&inc_dec_kp PAGE_UP PAGE_DOWN>;
+            sensor-bindings = <&encoder_binding_d>;
         };
 
         FUNCTION {
@@ -115,7 +134,7 @@
 &kp K_MUTE      &kp C_VOLUME_DOWN       &kp C_VOLUME_UP   &trans                   &trans   &trans      &trans  &trans                             &kt K_POWER
             >;
 
-            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
+            sensor-bindings = <&encoder_binding_a>;
         };
 
         MOUSE {
